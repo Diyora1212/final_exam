@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'django_filters',
+    'drf_yasg'
 ]
 SWAGGER_SETTINGS = {"USE_SESSION_AUTH": True}
 

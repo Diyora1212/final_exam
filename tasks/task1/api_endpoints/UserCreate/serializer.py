@@ -1,15 +1,15 @@
 from rest_framework import serializers
 from tasks.task1.models import User
 
+
 class UserCreateSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
-    bio =serializers.CharField(max_length=90)
     password1 = serializers.CharField(max_length=128, write_only=True)
     password2 = serializers.CharField(max_length=128, write_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'bio', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
     def validate(self, attrs):
         if attrs["password1"] != attrs["password2"]:

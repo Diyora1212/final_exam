@@ -9,15 +9,15 @@ class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
-    # def perform_create(self, serializer):
-    #     username = serializer.validated_data.get('username')
-    #     soft_deleted_user = User.objects.filter(username=username, is_deleted=True).first()
-    #
-    #     if soft_deleted_user:
-    #         soft_deleted_user.delete()
-    #
-    #     serializer.save()
-    #     return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
+    def perform_create(self, serializer):
+        username = serializer.get('username')
+        soft_deleted_user = User.objects.filter(username=username, is_deleted=True).first()
+
+        if soft_deleted_user:
+            soft_deleted_user.delete()
+
+        serializer.save()
+        return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
 
 
 __all__ = ('UserCreateView',)
